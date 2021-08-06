@@ -1,0 +1,13 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: "psqlclient" 
+spec:
+  runPolicy: "Serial"
+  source:
+    dockerfile:
+  strategy:
+    type: Docker                      
+    dockerStrategy:
+      dockerfilePath: ./Dockerfile 
+
