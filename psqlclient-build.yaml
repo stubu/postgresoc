@@ -1,13 +1,20 @@
-kind: BuildConfig
 apiVersion: build.openshift.io/v1
+kind: BuildConfig
 metadata:
-  name: "psqlclient" 
+  name: psqlclient
+  labels:
+    app: psqlclient
 spec:
-  runPolicy: "Serial"
   source:
-    dockerfile:
+    type: Git
+    git:
+      uri: https://github.com/stubu/postgresoc
+    contextDir: .
   strategy:
     type: Docker                      
     dockerStrategy:
-      dockerfilePath: ./Dockerfile 
-
+      dockerfilePath: Dockerfile    # Look for Dockerfile in: gitUri/contextDir/dockerfilePath
+  output:
+    to:
+      kind: ImageStreamTag
+      name: psqlclient:latest
